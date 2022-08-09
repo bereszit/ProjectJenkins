@@ -1,6 +1,8 @@
 object Main {
   def main(args:Array[String]): Unit = {
-    println("OK")
+    val a = List(A(1, "one"), A(2, "two"), A(3, "three"))
+    val result = a.map(A.getIdName(_))
+    println(result)
   }
 
 }
