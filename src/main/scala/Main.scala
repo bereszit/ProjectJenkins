@@ -3,7 +3,6 @@ object Main {
     val a = List(A(1, "one"), A(2, "two"), A(3, "three"))
     val result = a.map(A.getIdName(_))
     println("This is the result: " + result)
-    println("This is the result: " + result)
   }
 
 }
