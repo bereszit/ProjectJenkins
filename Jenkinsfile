@@ -1,11 +1,10 @@
 
 pipeline{
 
-	agent {label 'main'}
+	agent any
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
-		LOGOUT = sh('docker logout')
 	}
 
 	stages {
@@ -36,9 +35,7 @@ pipeline{
 
 	post {
 		always {
-			steps {
-				$LOGOUT
-			}
+			echo 'I will always say Hello again!'
 		}
         }
         
