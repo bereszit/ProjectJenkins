@@ -5,7 +5,6 @@ pipeline{
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
-		echo "password: $DOCKERHUB_CREDENTIALS_PSW     login: $DOCKERHUB_CREDENTIALS_USR"
 	}
 	
 	stages {
@@ -13,7 +12,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				
+				echo "password: $DOCKERHUB_CREDENTIALS_PSW     login: $DOCKERHUB_CREDENTIALS_USR"
 				sh 'docker build -t bereszit/project-jenkins:latest .'
 				
 			} 
