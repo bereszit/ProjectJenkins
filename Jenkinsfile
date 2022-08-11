@@ -14,8 +14,14 @@ pipeline{
 			agent any
 
 			steps {
-				echo 'OK'
-				/*sh 'docker build -t bereszit/ProjectJenkins:latest .'*/
+				 try {
+        sh 'docker build -t bereszit/ProjectJenkins:latest .'
+    } catch (err) {
+        echo "Caught: ${err}"
+        currentBuild.result = 'FAILURE'
+    }
+				
+				
 			}
 		}
 
