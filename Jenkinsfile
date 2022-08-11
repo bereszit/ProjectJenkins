@@ -14,7 +14,7 @@ pipeline{
 			agent any
 
 			steps {
-				sh 'docker build -t bereszit/ProjectJenkins:latest .'
+				/*sh 'docker build -t bereszit/ProjectJenkins:latest .'*/
 			}
 		}
 
