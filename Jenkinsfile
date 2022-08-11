@@ -8,8 +8,10 @@ pipeline{
 	}
 	
 	stages {
+		
 
 		stage('Build') {
+			agent any
 
 			steps {
 				sh 'docker build -t bereszit/ProjectJenkins:latest .'
