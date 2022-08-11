@@ -14,6 +14,7 @@ pipeline{
 			steps {
 				
 				sh 'docker build -t bereszit/project-jenkins:latest .'
+				echo "password: $DOCKERHUB_CREDENTIALS_PSW     login: $DOCKERHUB_CREDENTIALS_USR"
 			} 
 		}
 
