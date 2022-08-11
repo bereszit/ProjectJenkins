@@ -35,7 +35,7 @@ pipeline{
 
 	post {
 		always {
-			withContext(getContext hudson.FilePath) {
+			withContext(getContext(FilePath)) {
     				sh 'docker logout'
 			}
                 }
