@@ -1,7 +1,8 @@
 
 pipeline{
 
-	agent none
+	agent any
+	try {
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
@@ -14,15 +15,8 @@ pipeline{
 			agent any
 
 			steps {
-				 try {
-        sh 'docker build -t bereszit/ProjectJenkins:latest .'
-    } catch (err) {
-        echo "Caught: ${err}"
-        currentBuild.result = 'FAILURE'
-    }
-				
-				
-			}
+    				    sh 'docker build -t bereszit/ProjectJenkins:latest .'
+    			}
 		}
 
 		/*stage('Login') {
@@ -39,7 +33,13 @@ pipeline{
 			}
 		}*/
 		
-	}     
+	}  
+	}
+	catch (err) {
+        echo "Caught: ${err}"
+        currentBuild.result = 'FAILURE'
+    }
+	
 	
 }
 
