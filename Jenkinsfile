@@ -36,9 +36,11 @@ pipeline{
 
 	post {
 		always {
-			$LOGOUT
+			steps {
+				$LOGOUT
 			}
-                }
+		}
+        }
         
 }
 
