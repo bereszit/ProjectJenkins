@@ -1,4 +1,5 @@
-import hudson.*
+node {
+	def logout = sh 'docker logout'
 pipeline{
 
 	agent {label 'main'}
@@ -35,9 +36,9 @@ pipeline{
 
 	post {
 		always {
-			withContext(getContext(FilePath)) {
-    				sh 'docker logout'
+			logout
 			}
                 }
         }
+}
 }
