@@ -28,11 +28,13 @@ pipeline{
 				sh 'docker push bereszit/ProjectJenkins:latest'
 			}
 		}
-	}
-	
-		post {
-		always {
-			sh 'docker logout'
+		
+		stage('Logout') {
+			post {
+				always {
+					sh 'docker logout'
+				}	
+			}
 		}
 	}
 	
