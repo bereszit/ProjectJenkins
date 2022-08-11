@@ -5,6 +5,7 @@ pipeline{
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
+		ROOT=credentials('root')
 	}
 	
 	stages {
@@ -12,9 +13,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				echo "password: $DOCKERHUB_CREDENTIALS_PSW     login: $DOCKERHUB_CREDENTIALS_USR"
-				sh 'docker build -t bereszit/project-jenkins:latest .'
-				
+				sh 'echo $ROOT_PSW | sudo -S docker build -t bereszit/project-jenkins:latest .'
 			} 
 		}
 
