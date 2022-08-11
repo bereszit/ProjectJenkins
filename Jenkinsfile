@@ -1,6 +1,6 @@
 pipeline{
 
-	agent any
+	agent {label 'main'}
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
