@@ -13,7 +13,7 @@ pipeline{
 
 			steps {
 				
-				sh 'docker build -t bereszit/ProjectJenkins:latest .'
+				sh 'docker build -t bereszit/project-jenkins:latest .'
 			} 
 		}
 
@@ -27,7 +27,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push bereszit/ProjectJenkins:latest'
+				sh 'docker push bereszit/project-jenkins:latest'
 			}
 		}
 	}  	
