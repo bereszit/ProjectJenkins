@@ -29,13 +29,16 @@ pipeline{
 			}
 		}
 		
-		stage('Logout') {
-			post {
-				always {
-					sh 'docker logout'
-				}	
-			}
-		}
 	}
 	
+
+	post {
+		always {
+			script {
+		        	if (getContext(hudson.FilePath)) {
+                    			sh 'docker logout'
+                		}
+            		}
+		}	
+	}
 }
