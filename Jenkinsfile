@@ -1,3 +1,4 @@
+import hudson.*
 pipeline{
 
 	agent {label 'main'}
@@ -34,7 +35,7 @@ pipeline{
 
 	post {
 		always {
-			withContext(new MyConsoleLogFilter()) {
+			withContext(getContext hudson.FilePath) {
     				sh 'docker logout'
 			}
                 }
