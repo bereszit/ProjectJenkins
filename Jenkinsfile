@@ -34,11 +34,9 @@ pipeline{
 
 	post {
 		always {
-			script {
-		        	if (getContext(hudson.FilePath)) {
-                    			sh 'docker logout'
-                		}
-            		}
-		}	
-	}
+			withContext(new MyConsoleLogFilter()) {
+    				sh 'docker logout'
+			}
+                }
+        }
 }
