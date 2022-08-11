@@ -1,5 +1,5 @@
 
-def logout = sh 'docker logout'
+def logout
 pipeline{
 
 	agent {label 'main'}
@@ -36,7 +36,7 @@ pipeline{
 
 	post {
 		always {
-			logout
+			logout(sh 'docker logout')
 			}
                 }
         
