@@ -1,5 +1,5 @@
-node {
-	def logout = sh 'docker logout'
+
+def logout = sh 'docker logout'
 pipeline{
 
 	agent {label 'main'}
@@ -41,4 +41,4 @@ pipeline{
                 }
         
 }
-}
+
