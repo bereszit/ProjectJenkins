@@ -1,7 +1,7 @@
 
 pipeline{
 
-	agent {
+	/*agent {
 		docker { image 'docker:22.06-rc-cli'}
 	}
 	
@@ -11,11 +11,12 @@ pipeline{
 				sh 'node --version'
 			}
 		}
-	}
+	}*/
+	agent any
 
-	/*environment {
+	environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
-		JENKINS=credentials('jenkins')
+		//JENKINS=credentials('jenkins')
 	}
 	
 	stages {
@@ -23,7 +24,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'printf "$JENKINS_PSW\n" | sudo -S docker build -t bereszit/project-jenkins:latest .'
+				sh 'docker build -t bereszit/project-jenkins:latest .'
 			} 
 		}
 
@@ -40,5 +41,5 @@ pipeline{
 				sh 'docker push bereszit/project-jenkins:latest'
 			}
 		}
-	} */ 	
+	} 	
 }
