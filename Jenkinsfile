@@ -1,9 +1,19 @@
 
 pipeline{
 
-	agent any
+	agent {
+		docker { image 'docker:22.06-rc-cli'}
+	}
+	
+	stages {
+		stage('Test') {
+			steps {
+				sh 'node --version'
+			}
+		}
+	}
 
-	environment {
+	/*environment {
 		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
 		JENKINS=credentials('jenkins')
 	}
@@ -30,5 +40,5 @@ pipeline{
 				sh 'docker push bereszit/project-jenkins:latest'
 			}
 		}
-	}  	
+	} */ 	
 }
