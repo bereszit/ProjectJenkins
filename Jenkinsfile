@@ -20,11 +20,14 @@ pipeline{
 	}
 	
 	stages {
-		stage ('Test') {
+		stage {
+			steps {sh 'kubectl get pods -n fw-prod'}
+		}
+		/*stage ('Test') {
 			steps { sh 'sbt test'}
 		}
 		
-		/*stage('Build') {
+		stage('Build') {
 
 			steps {
 				sh 'docker build -t bereszit/project-jenkins:latest .'
