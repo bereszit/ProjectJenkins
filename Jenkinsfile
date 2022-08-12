@@ -13,7 +13,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'echo $JENKINS_PSW$"\n" | sudo -S docker build -t bereszit/project-jenkins:latest .'
+				sh 'printf "$JENKINS_PSW\n" | sudo -S docker build -t bereszit/project-jenkins:latest .'
 			} 
 		}
 
