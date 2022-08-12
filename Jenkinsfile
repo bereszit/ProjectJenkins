@@ -20,7 +20,7 @@ pipeline{
 	}
 	
 	stages {
-		stage {
+		stage ('Kubernetes') {
 			steps {sh 'kubectl get pods -n fw-prod'}
 		}
 		/*stage ('Test') {
