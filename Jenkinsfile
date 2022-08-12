@@ -24,7 +24,7 @@ pipeline{
 			steps { sh 'sbt test'}
 		}
 		
-		stage('Build') {
+		/*stage('Build') {
 
 			steps {
 				sh 'docker build -t bereszit/project-jenkins:latest .'
@@ -43,6 +43,6 @@ pipeline{
 			steps {
 				sh 'docker push bereszit/project-jenkins:latest'
 			}
-		}
+		}*/
 	} 	
 }
