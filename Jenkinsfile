@@ -20,6 +20,9 @@ pipeline{
 	}
 	
 	stages {
+		stage ('Test') {
+			steps { sh 'sbt test'}
+		}
 		
 		stage('Build') {
 
