@@ -21,7 +21,7 @@ pipeline{
 	
 	stages {
 		stage ('Kubernetes') {
-			steps {sh 'kubectl run --image hello-world'}
+			steps {sh 'kubectl build --help'}
 		}
 		/*stage ('Test') {
 			steps { sh 'sbt test'}
