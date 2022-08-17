@@ -21,7 +21,7 @@ pipeline{
 	
 	stages {
 		stage ('Kubernetes') {
-			steps {sh 'kubectl cluster-info'}
+			steps {sh 'kubectl cluster-info dump'}
 		}
 		/*stage ('Test') {
 			steps { sh 'sbt test'}
