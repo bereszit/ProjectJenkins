@@ -21,7 +21,8 @@ pipeline{
 	
 	stages {
 		stage ('Kubernetes') {
-			steps {sh 'kubectl get pods -n jk-test dump'}
+			steps {sh 'kubectl config use-context minikube'}
+			steps {sh 'kubectl get pods -n jk-test'}
 		}
 		/*stage ('Test') {
 			steps { sh 'sbt test'}
