@@ -21,7 +21,7 @@ pipeline{
 	
 	stages {
 		stage ('Kubernetes') {
-			steps {sh 'kubectl get serviceaccount -n jk-test'}
+			steps {sh 'kubectl get pods -n jk-test dump'}
 		}
 		/*stage ('Test') {
 			steps { sh 'sbt test'}
