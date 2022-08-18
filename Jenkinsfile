@@ -10,9 +10,9 @@ podTemplate(label: 'demo-app', cloud: 'kubernetes', serviceAccount: 'jk-sa',
   containers: [
     containerTemplate(name: 'buildkit', image: 'moby/buildkit:master', ttyEnabled: true, privileged: true),
   ],
-  volumes: [
+  /*volumes: [
     secretVolume(secretName: 'docker-config-json', mountPath: '/root/.docker-temp')
-  ]) {
+  ]*/) {
     node('demo-app') {
 
         stage('Prepare') {
