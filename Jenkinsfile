@@ -22,7 +22,7 @@ podTemplate(label: 'demo-app', cloud: 'kubernetes', serviceAccount: 'jk-sa',
         stage('Checkout Repository') {
           checkout([
           $class: 'GitSCM', branches: [[name: '*/master']],
-          userRemoteConfigs: [[url: 'https://github.com/bereszit/ProjectJenkins.git',credentialsId:'bereszit-github']]
+          userRemoteConfigs: [[url: 'https://github.com/bereszit/ProjectJenkins.git',credentialsId:'bereszit_github']]
           ])
           milestone(1)
         }
