@@ -27,7 +27,7 @@ podTemplate(label: 'demo-app', cloud: 'kubernetes', serviceAccount: 'jk-sa',
           milestone(1)
         }
 
-        /*stage('Build Docker Image') {
+        /* stage('Build Docker Image') {
           container('buildkit') {
             sh "buildctl --version"
             sh "mkdir ~/.docker"
