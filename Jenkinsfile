@@ -6,14 +6,14 @@ tag="latest"
 image="${repository}:${version}.${env.BUILD_NUMBER}"
 namespace="demo"
 
-podTemplate(label: 'jenkins-app', cloud: 'kubernetes', serviceAccount: 'jk-sa',
+podTemplate(label: 'demo-app', cloud: 'kubernetes', serviceAccount: 'jk-sa',
   containers: [
     containerTemplate(name: 'buildkit', image: 'moby/buildkit:master', ttyEnabled: true, privileged: true),
   ],
   volumes: [
     secretVolume(secretName: 'docker-config-json', mountPath: '/root/.docker-temp')
   ]) {
-    node('jenkins-app') {
+    node('demo-app') {
 
         stage('Prepare') {
             sh "uname -a"
