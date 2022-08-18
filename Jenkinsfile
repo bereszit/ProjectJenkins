@@ -1,52 +1,56 @@
 
-pipeline{
+version="1.0.0"
+registry="flowworks-carlsolutions.azurecr.io"
+repository="${registry}/buildkittest/test1"
+tag="latest"
+image="${repository}:${version}.${env.BUILD_NUMBER}"
+namespace="demo"
 
-	/*agent {
-		docker { image 'docker:22.06-rc-cli'}
-	}
-	
-	stages {
-		stage('Test') {
-			steps {
-				sh 'node --version'
-			}
-		}
-	}*/
-	agent any
+podTemplate(label: 'jenkins-app', cloud: 'kubernetes', serviceAccount: 'jk-sa',
+  containers: [
+    containerTemplate(name: 'buildkit', image: 'moby/buildkit:master', ttyEnabled: true, privileged: true),
+  ],
+  volumes: [
+    secretVolume(secretName: 'docker-config-json', mountPath: '/root/.docker-temp')
+  ]) {
+    node('jenkins-app') {
 
-	environment {
-		DOCKERHUB_CREDENTIALS=credentials('bereszit-dockerhub')
-		//JENKINS=credentials('jenkins')
-	}
-	
-	stages {
-		stage ('Kubernetes') {
-			steps {sh 'kubectl get pods -n jenkins'
-			      }
-		}
-		/*stage ('Test') {
-			steps { sh 'sbt test'}
-		}
-		
-		stage('Build') {
+        stage('Prepare') {
+            sh "uname -a"
+        }
 
-			steps {
-				sh 'docker build -t bereszit/project-jenkins:latest .'
-			} 
-		}
+        stage('Checkout Repository') {
+          checkout([
+          $class: 'GitSCM', branches: [[name: '*/master']],
+          userRemoteConfigs: [[url: 'git@github.com:bereszit/ProjectJenkins.git',credentialsId:'bereszit-github']]
+          ])
+          milestone(1)
+        }
 
-		stage('Login') {
+        /*stage('Build Docker Image') {
+          container('buildkit') {
+            sh "buildctl --version"
+            sh "mkdir ~/.docker"
+            sh "cp ~/.docker-temp/.dockerconfigjson ~/.docker/config.json"
+            sh """
+              buildctl build --frontend dockerfile.v0 --local context=. \
+                --local dockerfile=. \
+                --output type=image,name=${image},push=true
+              buildctl build --frontend dockerfile.v0 --local context=. \
+                --local dockerfile=. \
+                --output type=image,name=${repository}:${tag},push=true
+            """
+            milestone(2)
+          }
+        }*/
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-
-		stage('Push') {
-
-			steps {
-				sh 'docker push bereszit/project-jenkins:latest'
-			}
-		}*/
-	} 	
+    }
 }
+
+properties([[
+    $class: 'BuildDiscarderProperty',
+    strategy: [
+        $class: 'LogRotator',
+        artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10']
+    ]
+]);
