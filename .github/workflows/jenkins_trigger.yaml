@@ -1,4 +1,4 @@
-name: My Workflow
+name: TestBuildKit trigger
 on:
   pull_request:
     types:
@@ -9,10 +9,10 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - id: trigger-jenkins
+      - id: trigger-jenkins-job
         run: |
-          CRUMB=`curl -s -u "admin:11ee1729219fcdcebd692b85a3e82777e3" https://jenkins-dev.flowworks.com:443'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
-          echo $CRUMB
-          EX=$(curl -I -s -X POST -u "admin:11ee1729219fcdcebd692b85a3e82777e3"  -H "$CRUMB" "https://jenkins-dev.flowworks.com:443"/job/"TestBuildKit"/build)
-          echo $EX
+          JOB_NAME="TestBuildKit"
+          CRUMB=`curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}" ${{ secrets.JENKINS_URL }}'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`      
+          RESULT=$(curl -I -s -X POST -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}"  -H "$CRUMB" "${{ secrets.JENKINS_URL }}"/job/"$JOB_NAME"/build)
+          echo $RESULT
 
