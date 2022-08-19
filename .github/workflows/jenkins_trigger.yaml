@@ -8,5 +8,10 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo The PR was merged
+    - name: trigger single Job
+      uses: bereszit/ProjectJenkins@master
+      with:
+        url: "https://jenkins-dev.flowworks.com/"
+        user: "admin"
+        token: ${{ secrets.GITHUB_ACCES }}
+        job: "github-connection"
