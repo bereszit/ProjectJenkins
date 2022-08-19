@@ -1,2 +1,2 @@
 # ProjectJenkins
-Testing Jenkins6
+Testing Jenkins7
