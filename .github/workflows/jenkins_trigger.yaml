@@ -9,11 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: trigger single Job
-      uses: bereszit/ProjectJenkins@master
+      uses: distributhor/workflow-webhook@v2
       with:
+        webhook_type: 'json-extended'
         webhook_url: "https://jenkins-dev.flowworks.com:443/"
-        user: "admin"
-        token: ${{ secrets.JENKINS_TOKEN }}
-        job: "github-connection"
+        webhook_secret: ${{ secrets.JENKINS_TOKEN }}
+        webhook_user: "admin:"
+        webhook_job: "github-connection"
         wait: "true"
         timeout: "60"
