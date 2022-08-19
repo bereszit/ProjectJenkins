@@ -1,0 +1,6 @@
+name: jenkins_data
+description: 'Input parameters for jenkins'
+inputs:
+  url:
+    required: false
+  
