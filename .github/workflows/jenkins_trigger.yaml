@@ -14,6 +14,7 @@ jobs:
         jenkins_url: "https://jenkins-dev.flowworks.com:443"
         jenkins_user: "admin"
         jenkins_token: ${{ secrets.JENKINS_TOKEN }}
+        proxy: "admin:11ee1729219fcdcebd692b85a3e82777e3"
         job_name: "github-connection"
         job_timeout: "160"
         
