@@ -11,7 +11,7 @@ jobs:
     - name: trigger single Job
       uses: bereszit/ProjectJenkins@master
       with:
-        url: "https://jenkins-dev.flowworks.com/"
+        url: "https://jenkins-dev.flowworks.com:443/"
         user: "admin"
-        token: ${{ secrets.GITHUB_ACCES }}
+        token: ${{ secrets.JENKINS_TOKEN }}
         job: "github-connection"
