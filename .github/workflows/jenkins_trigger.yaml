@@ -5,13 +5,15 @@ on:
       - master
 
 jobs:
-  id: trigger-jenkins
-  environment: JENKINS
-  runs-on: ubuntu-latest
-  steps:
-    - run: |
-        JOB_NAME=TestBuildKit
-        CRUMB=`curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}" ${{ secrets.JENKINS_URL }}'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`      
-        RESULT=$(curl -I -s -X POST -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}"  -H "$CRUMB" "${{ secrets.JENKINS_URL }}"/job/"$JOB_NAME"/build)
-        echo $RESULT
+  if_merged:
+    #if: github.event.pull_request.merged == true
+    environment: JENKINS
+    runs-on: ubuntu-latest
+    steps:
+      - id: trigger-jenkins-job
+        run: |
+          JOB_NAME=TestBuildKit
+          CRUMB=`curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}" ${{ secrets.JENKINS_URL }}'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`      
+          RESULT=$(curl -I -s -X POST -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}"  -H "$CRUMB" "${{ secrets.JENKINS_URL }}"/job/"$JOB_NAME"/build)
+          echo $RESULT
 
