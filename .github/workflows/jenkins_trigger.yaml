@@ -11,7 +11,7 @@ jobs:
     - name: trigger single Job
       uses: toptal/jenkins-job-trigger-action@master
       with:
-        jenkins_url: "https://jenkins-dev.flowworks.com:443/"
+        jenkins_url: "https://jenkins-dev.flowworks.com:443"
         jenkins_user: "admin"
         jenkins_token: ${{ secrets.JENKINS_TOKEN }}
         job_name: "github-connection"
