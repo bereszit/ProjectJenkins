@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: trigger single Job
-      uses: bereszit/ProjectJenkins@master
+      uses: bereszit/jenkins_data@v1
       with:
         url: "https://jenkins-dev.flowworks.com:443/"
         user: "admin"
