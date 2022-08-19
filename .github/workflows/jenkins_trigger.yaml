@@ -9,4 +9,5 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: echo "oko"
+      - run: CRUMB=`curl -s -u "admin:11ee1729219fcdcebd692b85a3e82777e3" https://jenkins-dev.flowworks.com:443'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
+      - run: echo $CRUMB
