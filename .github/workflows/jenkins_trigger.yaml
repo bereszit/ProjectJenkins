@@ -11,8 +11,8 @@ jobs:
     steps:
       - id: trigger-jenkins
         run: |
-          CRUMB=`curl -s -u "admin:11ee1729219fcdcebd692b85a3e82777e3" https://jenkins-dev.flowworks.com:443'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
+          CRUMB=`curl -s -u "admin:${{ secrets.JENKINS_TOKEN }}" https://jenkins-dev.flowworks.com:443'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
           echo $CRUMB
-          EX=$(curl -I -s -X POST -u "admin:11ee1729219fcdcebd692b85a3e82777e3"  -H "$CRUMB" "https://jenkins-dev.flowworks.com:443"/job/"TestBuildKit"/build)
+          EX=$(curl -I -s -X POST -u "admin:${{ secrets.JENKINS_TOKEN }}"  -H "$CRUMB" "https://jenkins-dev.flowworks.com:443"/job/"TestBuildKit"/build)
           echo $EX
 
