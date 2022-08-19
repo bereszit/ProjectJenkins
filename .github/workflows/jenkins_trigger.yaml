@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: trigger single Job
-      uses: appleboy/jenkins-action@master
+      uses: toptal/jenkins-job-trigger-action@master
       with:
-        url: "https://jenkins-dev.flowworks.com:443"
-        user: "admin"
-        token: ${{ secrets.JENKINS_TOKEN }}
-        job: "github-connection"
-        wait: "true"
-        timeout: "60"
+        jenkins_url: "https://jenkins-dev.flowworks.com:443/"
+        jenkins_user: "admin"
+        jenkins_token: ${{ secrets.JENKINS_TOKEN }}
+        job_name: "github-connection"
+        job_timeout: "160"
+        
