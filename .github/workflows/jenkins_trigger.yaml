@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: trigger single Job
-      uses: toptal/jenkins-job-trigger-action@master
+      uses: mickeygoussetorg/trigger-jenkins-job@v1
       with:
-        jenkins_url: "https://jenkins-dev.flowworks.com:443"
-        jenkins_user: "admin"
-        jenkins_token: ${{ secrets.JENKINS_TOKEN }}
-        proxy: "admin:11ee1729219fcdcebd692b85a3e82777e3"
-        job_name: "github-connection"
-        job_timeout: "160"
-        
+        jenkins-server: "https://jenkins-dev.flowworks.com:443"
+        jenkins-job: "github-connection"
+        jenkins-username: "admin"
+        jenkins-token: ${{ secrets.JENKINS_TOKEN }}
+        pool-time: 30
+        timeout-value: 60
+        verbose: false        
