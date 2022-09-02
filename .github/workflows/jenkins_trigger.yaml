@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #- name: Read current commit of the master branch
-       # id: commit
-        #run: echo "::set-output name=id::$(pwd)"
-      - name: Start
-        env:
-          OKO: ${{ github.event.pull_request.head.sha }}
-        run: echo "$OKO"
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
