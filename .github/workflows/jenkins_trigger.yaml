@@ -2,7 +2,7 @@ name: TestBuildKit trigger
 on:
   push:
     branches:
-      - master
+      - variable_test
 
 jobs:
   if_merged:
