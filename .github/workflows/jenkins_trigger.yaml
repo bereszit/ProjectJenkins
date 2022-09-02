@@ -23,11 +23,11 @@ jobs:
           #echo ${{ steps.commit.outputs.id }}
 
       - name: Get Branch
-        id: branch
-        run: echo "${GITHUB_REF#refs/heads/}"
+        id: commit
+        run: echo "$(cat ${GITHUB_REF#refs/heads/variable_test})"
 
-      - name: Check Branch
-        run: echo "${{ env.branch }}"
+      - name: Check Commit
+        run: echo "${{ env.commit }}"
 
       - name: Get Hash
         id: hash
