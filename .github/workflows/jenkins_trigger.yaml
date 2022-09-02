@@ -14,22 +14,6 @@ jobs:
        # id: commit
         #run: echo "::set-output name=id::$(pwd)"
       - name: Start
-        uses: rlespinasse/git-commit-data-action@v1
-
-      - name: Print git commit data
-        run: |
-          echo "Get commit info"
-          echo " - ${{ env.GIT_COMMIT_SHA }}"
-          echo " - ${{ env.GIT_COMMIT_SHORT_SHA }}"
-          echo "Get author info"
-          echo " - ${{ env.GIT_COMMIT_AUTHOR }}"
-          echo " - ${{ env.GIT_COMMIT_AUTHOR_NAME }}"
-          echo " - ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
-          echo "Get committer info"
-          echo " - ${{ env.GIT_COMMIT_COMMITTER }}"
-          echo " - ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
-          echo " - ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
-          echo "Get message info"
-          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}"
-          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}"
-          echo " - ${{ env.GIT_COMMIT_MESSAGE_BODY }}"
+        env:
+          oko: ${{ github.event.pull_request.head.sha }}
+        run: echo "$oko"
