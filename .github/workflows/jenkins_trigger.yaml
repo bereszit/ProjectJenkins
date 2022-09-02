@@ -12,10 +12,15 @@ jobs:
     steps:
       - name: Read current commit of the master branch
         id: commit
-        run: echo "::set-output name=id::$(pwd)"
+        run: |
+          echo "::set-output name=id::$(pwd)"
+          echo "::set-output name=id1::$(ls)"
+        
 
       - name: Print out the commit
-        run: echo ${{ steps.commit.outputs.id }}
+        run: |
+          echo ${{ steps.commit.outputs.id }}
+          echo ${{ steps.commit.outputs.id1 }}
 
       - name: Print sth
         run: echo noga
