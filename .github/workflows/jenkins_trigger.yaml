@@ -13,7 +13,8 @@ jobs:
       #- name: Read current commit of the master branch
        # id: commit
         #run: echo "::set-output name=id::$(pwd)"
-
+      - name: Start
+        uses: rlespinasse/git-commit-data-action@v1
 
       - name: Print git commit data
         run: |
