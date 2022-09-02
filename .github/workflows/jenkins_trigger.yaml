@@ -8,11 +8,11 @@ jobs:
   if_merged:
     #if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    steps:
-      - id: trigger-jenkins-job
-        run: |
-          JOB_NAME=github-connection
-          CRUMB=`curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}" ${{ secrets.JENKINS_URL }}'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`      
-          RESULT=$(curl -I -s -X POST -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}"  -H "$CRUMB" "${{ secrets.JENKINS_URL }}"/job/"$JOB_NAME"/build)
-          echo $RESULT
 
+    steps:
+      - name: Read current commit of the master branch
+        id: commit
+        run: echo "::set-output name=id::$(pwd)"
+
+      - name: Print out the commit
+        run: echo ${{ steps.workspace.outputs.id }}
