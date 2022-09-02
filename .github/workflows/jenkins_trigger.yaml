@@ -16,3 +16,6 @@ jobs:
 
       - name: Print out the commit
         run: echo ${{ steps.workspace.outputs.id }}
+
+      - name: Print sth
+        run: echo noga
