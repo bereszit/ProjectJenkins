@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: master # only used to get last 20 merges
+      #- uses: actions/checkout@v2
+      #  with:
+      #    fetch-depth: 0
+      #    ref: master # only used to get last 20 merges
 
       - name: Retrieve last 20 master merges
         run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
