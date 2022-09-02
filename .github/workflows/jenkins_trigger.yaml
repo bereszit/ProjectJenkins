@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Read current commit of the master branch
         id: commit
-        run: echo "::set-output name=id::$(cat .git/refs/heads/master)"
+        run: echo "::set-output name=id::$(pwd)"
 
       - name: Print out the commit
         run: echo ${{ steps.commit.outputs.id }}
