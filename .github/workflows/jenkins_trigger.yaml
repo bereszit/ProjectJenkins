@@ -16,7 +16,7 @@ jobs:
 
       - name: LS
         id: ls
-        run: echo "::set-output name=id::$(ls)"
+        run: echo "::set-output name=id::$(ls -al)"
 
       - name: Print out the commit
         run: echo ${{ steps.ls.outputs.id }}
