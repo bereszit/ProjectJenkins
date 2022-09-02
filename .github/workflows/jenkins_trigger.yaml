@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #- uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       #  with:
       #    fetch-depth: 0
       #    ref: master # only used to get last 20 merges
