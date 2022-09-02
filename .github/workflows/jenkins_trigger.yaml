@@ -10,18 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Read current commit of the master branch
-        id: commit
-        run: echo "::set-output name=id::$(pwd)"
+      #- name: Read current commit of the master branch
+       # id: commit
+        #run: echo "::set-output name=id::$(pwd)"
 
       - name: LS
         id: ls
         run: echo "::set-output name=id::$(ls)"
 
       - name: Print out the commit
-        run: |
-          echo ${{ steps.ls.outputs.id }}
-          echo ${{ steps.commit.outputs.id }}
+        run: echo ${{ steps.ls.outputs.id }}
+          #echo ${{ steps.commit.outputs.id }}
 
       - name: Print sth
         run: echo noga
