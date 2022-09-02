@@ -10,8 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set outputs
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - name: Check outputs
-        run: echo ${{ steps.vars.outputs.sha_short }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master # only used to get last 20 merges
+
+      - name: Retrieve last 20 master merges
+        run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
+
+      # checkout regular branch
+      - uses: actions/checkout@v2
+
+      - name: output last merges
+        run: |
+          echo "LASTMERGES: ${{ env.LASTMERGES }}"
