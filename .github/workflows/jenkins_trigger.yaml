@@ -15,9 +15,20 @@ jobs:
         #run: echo "::set-output name=id::$(pwd)"
 
 
-      - name: Get Branch
-        id: commit
-        run: echo "commit=${{ github.event.pull_request.head.sha }}"
-
-      - name: Check Commit
-        run: echo "${{ env.commit }}"
+      - name: Print git commit data
+        run: |
+          echo "Get commit info"
+          echo " - ${{ env.GIT_COMMIT_SHA }}"
+          echo " - ${{ env.GIT_COMMIT_SHORT_SHA }}"
+          echo "Get author info"
+          echo " - ${{ env.GIT_COMMIT_AUTHOR }}"
+          echo " - ${{ env.GIT_COMMIT_AUTHOR_NAME }}"
+          echo " - ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
+          echo "Get committer info"
+          echo " - ${{ env.GIT_COMMIT_COMMITTER }}"
+          echo " - ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
+          echo " - ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
+          echo "Get message info"
+          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}"
+          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}"
+          echo " - ${{ env.GIT_COMMIT_MESSAGE_BODY }}"
