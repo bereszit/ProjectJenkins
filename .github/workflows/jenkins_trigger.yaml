@@ -15,5 +15,5 @@ jobs:
         #run: echo "::set-output name=id::$(pwd)"
       - name: Start
         env:
-          oko: ${{ github.event.pull_request.head.sha }}
-        run: echo "$oko"
+          OKO: ${{ github.event.pull_request.head.sha }}
+        run: echo "$OKO"
