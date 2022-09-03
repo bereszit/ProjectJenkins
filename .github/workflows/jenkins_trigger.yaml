@@ -2,7 +2,7 @@ name: TestBuildKit trigger
 on:
   push:
     branches:
-      - variable_test
+      - master
 
 jobs:
   if_merged:
@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-          ref: variable_test
+          ref: master
 
       - name: Retrieve last commit number
-        run: echo LASTMERGE=$(git log --pretty=format:"%H" --first-parent variable_test -1) >> $GITHUB_ENV
+        run: echo LASTMERGE=$(git log --pretty=format:"%H" --first-parent master -1) >> $GITHUB_ENV
         #run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
 
       # checkout regular branch
