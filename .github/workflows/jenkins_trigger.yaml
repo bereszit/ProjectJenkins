@@ -16,11 +16,11 @@ jobs:
           ref: variable_test
 
       - name: Retrieve last commit number
-        run: echo LASTMERGE=$(git log --pretty=format:"%H" --first-parent variable_test -1)
+        run: echo LASTMERGE=$(git log --pretty=format:"%H" --first-parent variable_test -1) >> $GITHUB_ENV
         #run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
 
       # checkout regular branch
-      - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
 
       - name: output last merges
         run: |
