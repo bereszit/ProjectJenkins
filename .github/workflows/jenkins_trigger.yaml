@@ -11,16 +11,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      #  with:
-      #    fetch-depth: 0
-      #    ref: master # only used to get last 20 merges
+        with:
+          fetch-depth: 1
+          ref: variable_test
 
-      - name: Retrieve last 20 master merges
-        run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
+      - name: Retrieve last commit number
+        run: echo LASTMERGE=$(git log --pretty=format:"%H" --first-parent variable_test -1)
+        #run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
 
       # checkout regular branch
       - uses: actions/checkout@v2
 
       - name: output last merges
         run: |
-          echo "LASTMERGES: ${{ env.LASTMERGES }}"
+          echo "LASTMERGE: ${{ env.LASTMERGE }}"
