@@ -2,17 +2,26 @@ name: TestBuildKit trigger
 on:
   push:
     branches:
-      - variable_test
+      - master
 
 jobs:
   if_merged:
     #if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    steps:
-      - id: trigger-jenkins-job
-        run: |
-          JOB_NAME=github-connection
-          CRUMB=`curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}" ${{ secrets.JENKINS_URL }}'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`      
-          RESULT=$(curl -I -s -X POST -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}"  -H "$CRUMB" "${{ secrets.JENKINS_URL }}"/job/"$JOB_NAME"/build)
-          echo $RESULT
 
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: master
+
+      - name: Retrieve last commit number
+        run: echo LASTMERGE=$(git log --pretty=format:"%H" --first-parent master -1) >> $GITHUB_ENV
+        #run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
+
+      # checkout regular branch
+      #- uses: actions/checkout@v2
+
+      - name: output last merges
+        run: |
+          echo "LASTMERGE: ${{ env.LASTMERGE }}"

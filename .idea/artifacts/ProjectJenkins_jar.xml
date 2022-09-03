@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ProjectJenkins:jar">
+    <output-path>$PROJECT_DIR$/target/scala-2.13</output-path>
+    <root id="archive" name="ProjectJenkins.jar">
+      <element id="module-output" name="ProjectJenkins" />
+      <element id="module-output" name="ProjectJenkins-build" />
+      <element id="extracted-dir" path="$USER_HOME$/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.8/scala-library-2.13.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
