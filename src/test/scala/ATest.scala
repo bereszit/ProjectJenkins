@@ -8,7 +8,7 @@ class ATest extends AnyWordSpec with Matchers with ScalaFutures with BeforeAndAf
   "ATest" should {
     "create idName string" in {
       val a = A(1, "one")
-      A.getIdName(a) shouldEqual "1_one"
+      A.getIdName(a) shouldEqual "2_one"
     }
   }
 
