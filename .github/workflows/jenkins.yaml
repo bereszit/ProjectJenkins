@@ -11,11 +11,11 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     runs-on: ubuntu-latest
     steps:
-        run: echo Check tests, as they failed!
+      - run: echo Check tests, as they failed!
 
   tests-passed-trigger-jenkins:
     name: Triggers jenkins pipline to build and deploy the application
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-        run: Tests passed! Execute deployment
+      - run: Tests passed! Execute deployment
