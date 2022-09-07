@@ -1,4 +1,4 @@
-name: Trigger Jenkins
+name: Trigger Jenkins build and deploy pipline
 on:
   workflow_run:
     workflows: [Tests]
@@ -7,15 +7,33 @@ on:
 
 jobs:
   tests-failed-not-trigger-jenkins:
-    name: Failed test triggering Jenkis stopped
+    name: Tests failed
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo Check tests, as they failed!
+      - run: |
+          echo Testes failed. Can not build and deploy the project
+          exit 1
 
   tests-passed-trigger-jenkins:
     name: Triggers jenkins pipline to build and deploy the application
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          ref: master
+
+      - name: Retrieve last commit number
+        run: |
+          echo COMMIT=$(git log --pretty=format:"%H" --first-parent master -1) >> $GITHUB_ENV
+          echo "COMMIT: ${{ env.COMMIT }}"
+        #run: echo LASTMERGES=$(git log --pretty=format:"%h %ad%x09%an%x09%s" --date=short --first-parent master -20) >> $GITHUB_ENV
+
+      - name: trigger-jenkins-job
+        run: |
+          JOB_NAME=pushComment
+          CRUMB=`curl -s -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}" ${{ secrets.JENKINS_URL }}'/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`      
+          RESULT=$(curl -I -s -X POST -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN}}"  -H "$CRUMB" "${{ secrets.JENKINS_URL }}"/job/"$JOB_NAME"/buildWithParameters?commit=${{ env.COMMIT }})
+          echo $RESULT
