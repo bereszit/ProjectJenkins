@@ -9,13 +9,15 @@ jobs:
     name: Execute tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 11
+      - name: Checks
+        uses: actions/checkout@v3
 
-      - uses: actiona/setup-java@v3
+      - name: Set up JDK 11
+        uses: actiona/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
           cache: 'sbt'
+
       - name: Run tests
         run: sbt test
