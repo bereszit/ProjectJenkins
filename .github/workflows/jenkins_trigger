@@ -1,10 +1,31 @@
-name: TestBuildKit trigger
+name: Trigger Jenkins
 on:
   push:
-    branches:
-      - master
+    branches: [master]
+  workflow_run:
+    workflows: ["Tests"]
 
 jobs:
+  testing:
+    name: Execute tests
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+
+      - uses: actiona/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'sbt'
+      - name: Run tests
+        run: sbt test
+
+  triggering_jenkins:
+    name: Triggers jenkins pipline to build and deploy the application
+    needs: testing
+    if: ${{ github.event_name == 'push' }}
   if_merged:
     #if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
